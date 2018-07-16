@@ -1,0 +1,27 @@
+  mat-card {
+    max-width: 80%;
+    margin: 2em auto;
+    text-align: center;
+  }
+  
+  mat-toolbar {
+    font-family: 'Forum', cursive;
+    color: #303030 !important;
+  }
+
+  mat-toolbar-row {
+    justify-content: space-between;
+  }
+  
+  .page-title {
+    font-family: 'OfTheBlueColourOfHerEyes', 'Forum';
+    font-size: 36px;
+  }
+
+  .done {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    color: white;
+  }
+  

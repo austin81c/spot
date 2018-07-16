@@ -1,0 +1,23 @@
+@import "~@angular/material/prebuilt-themes/purple-green.css";
+@import '~@angular/material/theming';
+@import "spot-theme.scss";
+@import url('https://fonts.googleapis.com/css?family=Forum');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+// always include only once per project
+@include mat-core();
+
+// import our custom theme
+@import 'spot-theme.scss';
+
+// specify theme class eg: <body class="spot-theme"> ... </body>
+.spot-theme {
+  // use our theme with angular-material-theme mixin
+  @include angular-material-theme($spot-theme);
+}
+
+//Colorfont for those with fancy browsers
+@font-face { 
+    font-family: "OfTheBlueColourOfHerEyes"; 
+    src: url("assets/OfTheBlueColourOfHerEyes.otf"); 
+  }  
