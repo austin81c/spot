@@ -1,0 +1,51 @@
+  .done {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    color: white;
+  }
+  
+  .mat-card  {
+    max-width: 50%;
+    margin: 2em auto;
+    text-align: center;
+  }
+  
+  .home-search-icon {
+    float: right;
+  }
+
+  .home-form {
+    min-width: 150px;
+    max-width: 95%;
+    margin: auto;
+  }
+  
+  .home-form-input {
+    width: 100%;
+  }
+
+  .mat-input-element {
+    max-width: 75%;
+  }
+
+  @-webkit-keyframes autofill {
+    to {
+        color: white;
+        background: transparent;
+    }
+  }
+
+  ::placeholder {
+    color: #303030;
+  }
+
+input:-webkit-autofill {
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+}
+  @media screen and (max-width: 768px) {
+    .mat-card {
+      max-width: 80%;
+    }
+  }
