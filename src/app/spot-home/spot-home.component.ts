@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm, RequiredValidator, FormGroup, FormControl, Validators, ValidatorFn, AbstractControl} from '@angular/forms';
+import { SpotAuthenticationService } from '../spot-authentication/spot-authentication.service';
 
 @Component({
   selector: 'spot-home',
@@ -11,7 +12,7 @@ export class SpotHomeComponent implements OnInit {
   artist: any;
   homeFormGroup: FormGroup;
 
-  constructor() {
+  constructor(private _spotAuthService: SpotAuthenticationService) {
   }
 
   ngOnInit() {
@@ -24,10 +25,8 @@ export class SpotHomeComponent implements OnInit {
 
   ngOnSubmit() {
     if (this.homeFormGroup.valid) {
-      console.log("b4: " + this.homeFormGroup);
       this.homeFormGroup.reset();
-      console.log("after: ");
-      console.log(this.homeFormGroup);
+      this._spotAuthService.searchArtists();
     }
     else if(this.homeFormGroup.invalid) {
       console.log("reeeeeeeee");
