@@ -2,7 +2,6 @@
 
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import * as Rx from 'rxjs';
 
 import { MaterialModule } from './material/material.module';
 import { NgModule } from '@angular/core';

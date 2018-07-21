@@ -2,7 +2,7 @@
   <form class="home-form" [formGroup]="homeFormGroup" (ngSubmit)="ngOnSubmit()">
 
         <mat-form-field class="home-form-input">
-            <input matInput placeholder="Artist Name" value="Your favorite artist"  formControlName="artist">
+            <input matInput placeholder="Artist Name" value="Your favorite artist" name="artist" formControlName="artist">
             <button mat-icon-button class="home-search-icon">
               <mat-icon>search</mat-icon>
             </button>

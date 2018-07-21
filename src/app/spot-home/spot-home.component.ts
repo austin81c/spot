@@ -26,7 +26,7 @@ export class SpotHomeComponent implements OnInit {
   ngOnSubmit() {
     if (this.homeFormGroup.valid) {
       this.homeFormGroup.reset();
-      this._spotAuthService.searchArtists();
+      this._spotAuthService.searchArtist(this.homeFormGroup.value);
     }
     else if(this.homeFormGroup.invalid) {
       console.log("reeeeeeeee");
