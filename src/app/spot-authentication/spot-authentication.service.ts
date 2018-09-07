@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { SpotAuthenticationResource } from './spot-authentication.resource';
 import { GetTokenResponse } from './GetTokenResponse';
-import { SearchArtistResponse } from './SearchArtistResponse';
+import { SearchResponse } from './SearchResponse';
+import { Subscription, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,10 +25,8 @@ export class SpotAuthenticationService {
     });
   }
 
-  searchArtist(name: string) {
-    this._spotAuthResource.searchArtist(name).subscribe((data:SearchArtistResponse) => {
-
-    });
+  searchArtist(name: string): Observable<SearchResponse> {
+    return this._spotAuthResource.searchArtist(name);
   }
 
 }

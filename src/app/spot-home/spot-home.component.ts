@@ -1,43 +1,51 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import {NgForm, RequiredValidator, FormGroup, FormControl, Validators, ValidatorFn, AbstractControl} from '@angular/forms';
 import { SpotAuthenticationService } from '../spot-authentication/spot-authentication.service';
+import { SearchImage, SearchItem, SearchResponse } from '../spot-authentication/SearchResponse';
 
 @Component({
   selector: 'spot-home',
   templateUrl: './spot-home.component.html',
-  styleUrls: ['./spot-home.component.css']
+  styleUrls: ['./spot-home.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SpotHomeComponent implements OnInit {
 
   artist: any;
-  homeFormGroup: FormGroup;
+  resultsExist: boolean = false;
+  topResult: SearchItem;
+  topResultImage: SearchImage;
 
-  constructor(private _spotAuthService: SpotAuthenticationService) {
+  constructor(private _spotAuthService: SpotAuthenticationService, private _changeDetectorRef: ChangeDetectorRef) {
+    
   }
 
   ngOnInit() {
-    this.homeFormGroup = new FormGroup({
-      'artist': new FormControl(this.artist, [
-        this.forbiddenNameValidator(/odsmack/i)
-      ])
-    });
+    this._spotAuthService.getToken();
+    this._changeDetectorRef.markForCheck();
   }
 
-  ngOnSubmit() {
-    if (this.homeFormGroup.valid) {
-      this.homeFormGroup.reset();
-      this._spotAuthService.searchArtist(this.homeFormGroup.value);
+  onSubmit() {
+    if (this.artist) {
+      this._spotAuthService.searchArtist(this.artist).subscribe((data:SearchResponse) => {
+        if (data && data.artists && data.artists.items) {
+          this.topResult = data.artists.items[0];
+          this.topResultImage = data.artists.items[0].images[0];
+          this.resultsExist = true;
+          this._changeDetectorRef.detectChanges();
+        }
+      }, (err)=> {
+          this.onArtistError(err);
+      }, ()=>{});
     }
-    else if(this.homeFormGroup.invalid) {
-      console.log("reeeeeeeee");
-    } 
   }
 
-  forbiddenNameValidator(nameRe: RegExp): ValidatorFn {
-    return (control: AbstractControl): {[key: string]: any} | null => {
-      const forbidden = nameRe.test(control.value);
-      return forbidden ? {'forbiddenName': {value: control.value}} : null;
-    };
+  onArtistQuery(data: SearchResponse) {
+    console.log(data);
+  }
+
+  onArtistError(err: any) {
+    console.log(err);
   }
 
 }

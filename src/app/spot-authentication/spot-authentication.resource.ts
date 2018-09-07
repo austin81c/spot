@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { Observable } from '../../../node_modules/rxjs';
+import { SearchResponse } from './SearchResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +16,11 @@ export class SpotAuthenticationResource {
     return this.http.get("http://localhost:3000/api/token");
   }
 
-  public searchArtist(artist: string){
+  public searchArtist(artist: string): Observable<any>{
     let query = "?name=" + artist;
-    return this.http.get("http://localhost:3000/api/search" + query);
+    let auth = window.localStorage.getItem("token");
+    let headers = new HttpHeaders().set("authentication", "Bearer " + auth);
+    return this.http.get("http://localhost:3000/api/search" + query, {"headers":headers});
   }
 
 

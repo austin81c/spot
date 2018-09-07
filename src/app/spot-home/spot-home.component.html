@@ -1,15 +1,21 @@
 <mat-card>
-  <form class="home-form" [formGroup]="homeFormGroup" (ngSubmit)="ngOnSubmit()">
-
-        <mat-form-field class="home-form-input">
-            <input matInput placeholder="Artist Name" value="Your favorite artist" name="artist" formControlName="artist">
-            <button mat-icon-button class="home-search-icon">
-              <mat-icon>search</mat-icon>
-            </button>
-          </mat-form-field>
-
-  </form>
+  <input matInput id="artist" [(ngModel)]="artist">
+  <button mat-icon-button class="home-search-icon" (click)="onSubmit()">
+    <mat-icon>search</mat-icon>
+  </button>
 </mat-card>
+
+<div *ngIf="resultsExist">
+  <mat-card>
+    <div class="top-result">
+      <img src="{{topResultImage.url}}" height="auto" width="500">
+      <div class="top-result-title">
+        {{topResult.name}}
+      </div>
+    </div>
+  </mat-card>
+</div>
+
 
 <span class="done">
   <button mat-fab>
