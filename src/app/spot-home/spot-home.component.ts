@@ -14,8 +14,6 @@ export class SpotHomeComponent implements OnInit {
 
   artist: any;
   resultsExist: boolean = false;
-  topResult: SearchItem;
-  topResultImage: SearchImage;
   resultsArray: SearchItem[];
 
   subscriptions: Subscription[] = [];
@@ -40,8 +38,6 @@ export class SpotHomeComponent implements OnInit {
   onArtistQuery(data: SearchResponse) {
     if (data && data.artists && data.artists.items) {
       this.resultsArray = data.artists.items;
-      this.topResult = data.artists.items[0];
-      this.topResultImage = data.artists.items[0].images[0];
       this.resultsExist = true;
       this._changeDetectorRef.detectChanges();
     }

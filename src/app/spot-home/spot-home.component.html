@@ -6,17 +6,5 @@
 </mat-card>
 
 <div *ngIf="resultsExist">
-  <mat-card>
-    <mat-list>
-      <mat-list-item *ngFor="let result of resultsArray"> 
-
-      </mat-list-item>
-    </mat-list>
-    <div class="top-result">
-      <img src="{{topResultImage.url}}" height="auto" width="80%">
-      <div class="top-result-title">
-        {{topResult.name}}
-      </div>
-    </div>
-  </mat-card>
+  <spot-results-list [data]="resultsArray"></spot-results-list>
 </div>

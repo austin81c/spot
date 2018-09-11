@@ -14,6 +14,7 @@ import { SpotFourOhFourComponent } from './spot-four-oh-four/spot-four-oh-four.c
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SpotAuthenticationService } from './spot-authentication/spot-authentication.service';
 import { SpotFooterComponent } from './spot-footer/spot-footer.component';
+import { SpotResultsListComponent } from './spot-results-list/spot-results-list.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { SpotFooterComponent } from './spot-footer/spot-footer.component';
     SpotHomeComponent,
     SpotNavigationComponent,
     SpotFourOhFourComponent,
-    SpotFooterComponent
+    SpotFooterComponent,
+    SpotResultsListComponent
   ],
   imports: [
     BrowserAnimationsModule,

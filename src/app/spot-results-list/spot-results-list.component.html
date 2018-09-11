@@ -1,0 +1,15 @@
+<mat-card>
+  <div class="top-result">
+      <div class="top-result-title">
+          {{topResult.name}}
+        </div>
+    <img src="{{topResultImage.url}}" height="auto" width="80%">
+  </div>
+
+  <mat-grid-list cols=2 class="result-list">
+      <mat-grid-tile class="result-list-item" *ngFor="let result of data">
+        <div class="result-title">{{result.name}}</div>
+        <img src="{{result.images[0].url}}" height="auto" width="25%">
+      </mat-grid-tile>
+  </mat-grid-list>
+</mat-card>

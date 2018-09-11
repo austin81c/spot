@@ -22,11 +22,6 @@
     max-width: 75%;
   }
 
-  .top-result img {
-    width: 80%;
-    height: auto;
-  }
-
   @-webkit-keyframes autofill {
     to {
         color: white;
