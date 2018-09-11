@@ -2,6 +2,7 @@ import { Component, OnInit, NgZone, ChangeDetectorRef, ChangeDetectionStrategy }
 import {NgForm, RequiredValidator, FormGroup, FormControl, Validators, ValidatorFn, AbstractControl} from '@angular/forms';
 import { SpotAuthenticationService } from '../spot-authentication/spot-authentication.service';
 import { SearchImage, SearchItem, SearchResponse } from '../spot-authentication/SearchResponse';
+import { Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'spot-home',
@@ -15,6 +16,9 @@ export class SpotHomeComponent implements OnInit {
   resultsExist: boolean = false;
   topResult: SearchItem;
   topResultImage: SearchImage;
+  resultsArray: SearchItem[];
+
+  subscriptions: Subscription[] = [];
 
   constructor(private _spotAuthService: SpotAuthenticationService, private _changeDetectorRef: ChangeDetectorRef) {
     
@@ -22,26 +26,25 @@ export class SpotHomeComponent implements OnInit {
 
   ngOnInit() {
     this._spotAuthService.getToken();
-    this._changeDetectorRef.markForCheck();
   }
 
   onSubmit() {
     if (this.artist) {
-      this._spotAuthService.searchArtist(this.artist).subscribe((data:SearchResponse) => {
-        if (data && data.artists && data.artists.items) {
-          this.topResult = data.artists.items[0];
-          this.topResultImage = data.artists.items[0].images[0];
-          this.resultsExist = true;
-          this._changeDetectorRef.detectChanges();
-        }
-      }, (err)=> {
-          this.onArtistError(err);
-      }, ()=>{});
+      this.subscriptions.push(this._spotAuthService.searchArtist(this.artist).subscribe(
+        this.onArtistQuery.bind(this),
+        this.onArtistError.bind(this),
+        ()=>{}));
     }
   }
-
+  
   onArtistQuery(data: SearchResponse) {
-    console.log(data);
+    if (data && data.artists && data.artists.items) {
+      this.resultsArray = data.artists.items;
+      this.topResult = data.artists.items[0];
+      this.topResultImage = data.artists.items[0].images[0];
+      this.resultsExist = true;
+      this._changeDetectorRef.detectChanges();
+    }
   }
 
   onArtistError(err: any) {

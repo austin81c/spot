@@ -13,13 +13,15 @@ import { SpotRoutingModule } from './spot-routing/spot-routing.module';
 import { SpotFourOhFourComponent } from './spot-four-oh-four/spot-four-oh-four.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SpotAuthenticationService } from './spot-authentication/spot-authentication.service';
+import { SpotFooterComponent } from './spot-footer/spot-footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SpotHomeComponent,
     SpotNavigationComponent,
-    SpotFourOhFourComponent
+    SpotFourOhFourComponent,
+    SpotFooterComponent
   ],
   imports: [
     BrowserAnimationsModule,

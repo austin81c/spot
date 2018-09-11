@@ -14,15 +14,18 @@ export class SpotAuthenticationService {
   constructor(private _spotAuthResource: SpotAuthenticationResource) { 
   }
 
-  getToken() {
-    this._spotAuthResource.getClientCredentials().subscribe((data:GetTokenResponse) => {
-      if(data && data.access_token) {
-        this.token = data.access_token;
-        window.localStorage.setItem('token',this.token);
-      }
-    }, err => {
-      console.log(err);
-    });
+  getToken(force:boolean=false) {
+    if (!window.localStorage.getItem('token') || force) {
+      this._spotAuthResource.getClientCredentials().subscribe((data:GetTokenResponse) => {
+        if(data && data.access_token) {
+          this.token = data.access_token;
+          window.localStorage.setItem('token',this.token);
+        }
+      }, err => {
+        console.log(err);
+      });
+    }
+
   }
 
   searchArtist(name: string): Observable<SearchResponse> {
